@@ -68,23 +68,6 @@ public class Client extends JFrame {
         jFrame.add(box, BorderLayout.SOUTH);
         jFrame.add(jSplitPane, BorderLayout.CENTER);
 
-       /* textArea = new JTextPane();
-        textArea.setEditable(false);
-        textArea.setContentType("text/html");
-        textArea.setPreferredSize(new Dimension(800, 800));
-        scrollPane = new JScrollPane(textArea);
-        add(scrollPane, BorderLayout.CENTER);
-        setTitle("CHAT");
-
-        Box box = Box.createHorizontalBox();
-        add(box, BorderLayout.SOUTH);
-
-        inputText = new JTextField();
-        JButton buttonSend = new JButton("Send:");
-
-        box.add(inputText);
-        box.add(buttonSend);*/
-
         ActionListener sendButtonListener = new ActionListener() {
 
             @Override
@@ -104,9 +87,7 @@ public class Client extends JFrame {
         pack();
         setResizable(true);
         jFrame.setVisible(true);
-
         connectToServer();
-
 
     }
 
@@ -123,7 +104,6 @@ public class Client extends JFrame {
 
         messages = new StringBuilder("<html>");
         list = new StringBuilder("<html>");
-
 
     }
 
@@ -143,7 +123,6 @@ public class Client extends JFrame {
 
         threadService = Executors.newSingleThreadExecutor();
         init();
-        // getUsersList();
         readMessage();
     }
 
@@ -198,13 +177,6 @@ public class Client extends JFrame {
                         continue;
                     } else if (message != null) {
                         addTextLine(message);
-//							System.out.println("Sever's message: " + message);
-//							System.out.println("Please, write message to server");
-//							String messageFromClient = scan.nextLine();
-
-//							PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-//							writer.println(messageFromClient);
-
                     }
                 }
             } catch (IOException e) {
@@ -222,31 +194,5 @@ public class Client extends JFrame {
         sendMessage("/login " + pass);
 
     }
-    /*private void getUsersList() {
-        Runnable runnable = () -> {        //new Runnable()
-
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
-                while (true) {
-
-                    String listUser = in.readLine();
-                    System.out.println(list);
-                    if(listUser.contains("#usersList")){
-                        String[] args = listUser.split(" ");
-                        list.delete(0,list.length());
-                        for(int i=1;i<args.length;i++){
-                            addUser(args[i]);
-                        }
-
-                    }
-                    Thread.yield();
-                    }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        };
-        threadService.execute(runnable);
-    }*/
 
 }
